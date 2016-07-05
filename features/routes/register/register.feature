@@ -14,4 +14,3 @@ Feature: About us page shows the members of ng-nj
     Given the user lands on the about-us page
     When user clicks on the user "Bob"
     Then The box should update to display bob's information
-

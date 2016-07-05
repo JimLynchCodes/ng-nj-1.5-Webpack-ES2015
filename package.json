@@ -1,7 +1,9 @@
 {
   "name": "ngNj15",
   "version": "0.0.0",
-  "dependencies": {},
+  "dependencies": {
+    "angularfire": "^2.0.1"
+  },
   "scripts": {
     "test": "gulp test"
   },

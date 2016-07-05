@@ -3,7 +3,8 @@
 
   describe('EventFactory', function(){
 
-    beforeEach(module('ngNjOrg'));
+    var EventFactory;
+    // beforeEach(module('ngNjOrg'));
     beforeEach(inject(function(_EventFactory_) {
       EventFactory = _EventFactory_;
     }));

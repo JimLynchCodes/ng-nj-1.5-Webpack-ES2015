@@ -8,7 +8,7 @@ import { GithubContributorService } from '../app/components/githubContributor/gi
 import { WebDevTecService } from '../app/components/webDevTec/webDevTec.service';
 import { NavbarDirective } from '../app/components/navbar/navbar.directive';
 import { MalarkeyDirective } from '../app/components/malarkey/malarkey.directive';
-import {LoginBar} from "../app/header/login-bar/login-bar.directive.js";
+// import {LoginBarDirective} from "../app/header/login-bar/login-bar.directive.js";
 import {AuthenticationService} from "../app/shared-services/authentication.service";
 import {Authentication} from "../app/shared-services/authentication";
 import {AboutUsController} from "../app/routes/about-us/about-us.controller";
@@ -37,7 +37,7 @@ angular.module('ngNj15', ['firebase','ngMaterial','ngAnimate', 'ngCookies', 'ngT
   .controller('MainController', MainController)
   .directive('acmeNavbar', NavbarDirective)
   .directive('acmeMalarkey', MalarkeyDirective)
-  .directive('loginBar', LoginBar)
+  // .directive('loginBar', LoginBar)
   .controller('AboutUsController', AboutUsController)
   .filter('bannedUser', bannedUser)
   .service('AboutMembersRetriever', AboutMembersRetriever)

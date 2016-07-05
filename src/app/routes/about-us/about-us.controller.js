@@ -11,6 +11,8 @@ export class AboutUsController {
         self.pulledEvents = data;
         self.membersList = data;
 
+        $log.log('got memebers! ' + self.membersList)
+
         angular.forEach(self.membersList, function (value, key) {
           $log.log("member: " + value.firstName + " " + key)
           self.currentUserSelected = value;

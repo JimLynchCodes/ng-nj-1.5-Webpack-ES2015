@@ -3,7 +3,8 @@
 
 describe('PrivacyController', function(){
 
-  beforeEach(module('ngNjOrg'));
+  var $controller;
+  // beforeEach(module('ngNjOrg'));
     beforeEach(inject(function(_$controller_) {
       $controller = _$controller_('PrivacyController');
     }));

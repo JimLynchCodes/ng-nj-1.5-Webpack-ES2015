@@ -10,59 +10,59 @@ export class AuthenticationService {
         currentUserObject: ""
       };
 
-      self.login = function(user) {
+
+  };
+
+  static login (user) {
+
+    return self.auth.$authWithPassword({
+      email: user.email,
+      password: user.password
+    }).then(function(registeredUser){
+
+      $log.log("logged in!");
+      $location.path('/home');
+      self.loggedInObject.isLoggedIn = true;
+      self.loggedInObject.currentUserObject = registeredUser;
+
+      var childString = "users/" + registeredUser.uid;
+
+      $log.log("getting object for: " + childString);
+
+      self.newref = new Firebase(FIREBASE_URL)
+      var firebaseUserObj = $firebaseObject(self.newref.child(childString))
+      return firebaseUserObj.$loaded().then(function(data) {
+        $log.log("got firebase obj data: " + data.email);
+        $log.log("data like firstName: " + data.firstName);
+        return data;
+      }, function(error) {
+
+      })
 
 
+    })
+      .catch(function(error) {
 
-        return self.auth.$authWithPassword({
-          email: user.email,
-          password: user.password
-        }).then(function(registeredUser){
+        console.log("Firebase auth Error: " + error);
+        var errorString = "" + error;
+        $log.log("error string: " + errorString.code);
 
-          $log.log("logged in!");
-          $location.path('/home');
-          self.loggedInObject.isLoggedIn = true;
-          self.loggedInObject.currentUserObject = registeredUser;
+        $log.log("error is :" + JSON.stringify(error));
 
-          var childString = "users/" + registeredUser.uid;
-
-          $log.log("getting object for: " + childString);
-
-          self.newref = new Firebase(FIREBASE_URL)
-          var firebaseUserObj = $firebaseObject(self.newref.child(childString))
-            return firebaseUserObj.$loaded().then(function(data) {
-              $log.log("got firebase obj data: " + data.email);
-              $log.log("data like firstName: " + data.firstName);
-              return data;
-            }, function(error) {
-
-            })
+        return $q.reject(error);
+      });
 
 
-        })
-          .catch(function(error) {
+  }
 
-            console.log("Firebase auth Error: " + error);
-            var errorString = "" + error;
-            $log.log("error string: " + errorString.code);
+  logout () {
+    self.loggedInObject.isLoggedIn = false;
+    self.loggedInObject.currentUserObject = "";
+    $location.path('/home');
+    // return self.auth.$unauth();
 
-            $log.log("error is :" + JSON.stringify(error));
-
-            return $q.reject(error);
-          });
-
-
-      };
-
-      self.logout = function() {
-        self.loggedInObject.isLoggedIn = false;
-        self.loggedInObject.currentUserObject = "";
-        $location.path('/home');
-        // return self.auth.$unauth();
-
-        // return false;
-      }
-     }
+    // return false;
+  }
 
 
 }

@@ -11,7 +11,7 @@ export class Authentication {
         var userRef = new Firebase(FIREBASE_URL + "users/" + authUser.uid);
         var userObj = $firebaseObject(userRef);
       }
-    })
+    });
 
 
 
@@ -128,7 +128,8 @@ export class Authentication {
         auth.$createUser({
           email: user.email,
           password: user.password
-        }).then(function(registeredUser) {
+      }).then((registeredUser) => {
+
 
           console.log("got the registered user! " + registeredUser);
           console.log("got id! " + registeredUser.uid);
@@ -138,45 +139,47 @@ export class Authentication {
           $rootScope.message = "Welcome " + user.firstName + ". Thanks for registering!";
 
 
-          // var regRef = new Firebase(FIREBASE_URL + 'users')
-            // .child(registeredUser.uid).set({
-            //   // date: Firebase.ServerValue.TIMESTAMP.toDateString(),
-            //   date: new Date().toString(),
-            //   userId: registeredUser.uid,
-            //   firstName: user.firstName,
-            //   lastName: user.lastName,
-            //   email: user.email,
-            //   favoriteFood: favoriteFoods[
-            //     Math.floor(Math.random() * favoriteFoods.length)
-            //     ],
-            //   vacationSpot: favoriteVacationDestinations[
-            //     Math.floor(Math.random() * favoriteVacationDestinations.length)
-            //     ],
-            //   numberOfKids: numbersOfKidsAmounts[
-            //     Math.floor(Math.random() * numbersOfKidsAmounts.length)
-            //     ],
-            //   biggestFear: biggestFears[
-            //     Math.floor(Math.random() * biggestFears.length)
-            //     ],
-            //   causeOfDeath: futureCauseOfDeaths[
-            //     Math.floor(Math.random() * futureCauseOfDeaths.length)
-            //     ]
-              // ,
-              // skillToWorkOn: skillsNeedToWorkOn [
-              //   Math.floor(Math.random() * favoriteFoods.length)
-              //   ],
-              // spiritAnimal: spiritAnimals [
-              //   Math.floor(Math.random() * spiritAnimals.length)
-              //   ]
-            // })
+          var regRef = new Firebase(FIREBASE_URL + 'users')
+            .child(registeredUser.uid).set({
+              // date: Firebase.ServerValue.TIMESTAMP.toDateString(),
+              date: new Date().toString(),
+              userId: registeredUser.uid,
+              firstName: user.firstName,
+              lastName: user.lastName,
+              email: user.email,
+              favoriteFood: favoriteFoods[
+                Math.floor(Math.random() * favoriteFoods.length)
+                ],
+              vacationSpot: favoriteVacationDestinations[
+                Math.floor(Math.random() * favoriteVacationDestinations.length)
+                ],
+              numberOfKids: numbersOfKidsAmounts[
+                Math.floor(Math.random() * numbersOfKidsAmounts.length)
+                ],
+              biggestFear: biggestFears[
+                Math.floor(Math.random() * biggestFears.length)
+                ],
+              causeOfDeath: futureCauseOfDeaths[
+                Math.floor(Math.random() * futureCauseOfDeaths.length)
+                ]
+              ,
+              skillToWorkOn: skillsNeedToWorkOn [
+                Math.floor(Math.random() * favoriteFoods.length)
+                ],
+              spiritAnimal: spiritAnimals [
+                Math.floor(Math.random() * spiritAnimals.length)
+                ]
+            })
 
 
-        });
-        //   .catch(function(error){
-        //   $rootScope.message = "Uh oh! And error occurred: " + error.message;
-        //
-        //  $state.go("home");
-        // })
+        })
+          .catch(function(error){
+          $rootScope.message = "Uh oh! And error occurred: " + error.message;
+
+            $log.log("Uh oh! And error occurred: " + error.message);
+
+         $state.go("home");
+        })
       }
     }
 
